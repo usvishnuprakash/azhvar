@@ -1,0 +1,34 @@
+
+
+    <div class="container-fluid" style="background-color: rgba(240, 248, 255, 0.808);">
+        <form action="/u/repair/{{id}}" method="POST">
+            <div class="form-group">
+                <label for="problems">what is the problem</label>
+                <textarea name="problem" class="form-control" name="" id="" cols="" rows="5" required="required"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Enter MobileNumber</label>
+                <input name="contact_number" class="form-control" type="numper" required="required">
+            </div>
+            <div class="form-group">
+                <label for="address">Enter Pickup Address</label>
+                <textarea name="address" class="form-control" name="" id="" cols="" rows="" required="required"></textarea>
+
+            </div>
+            <div class="form-group">
+                <label for="">Pickup Time</label>
+                <select name="pickup_time" id="" class="form-control" required="required">
+                    <option value="">when you're available</option>
+                    <option value="6:AM - 7:PM" >6:AM - 7:PM</option>
+                    <option value="6:AM - 12:PM">6:AM - 12:PM</option>
+                    <option value="12AM - 7 :PM">12AM - 7 :PM</option>
+                    <option value="4PM - 7 :PM">4PM - 7 :PM</option>
+
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-primary">need repair</button>
+            </div>
+        </form>
+    </div>
+

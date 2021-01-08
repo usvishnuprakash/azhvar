@@ -1,0 +1,110 @@
+<section>
+    <style>
+        #main {
+            margin-left: auto;
+            margin-right: auto;
+            width: 300px;
+
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+            width: 300px;
+        }
+
+        .my-auto {
+            margin-top: auto;
+            margin-bottom: auto;
+            height: 150px;
+        }
+
+        form div {
+            margin-left: auto;
+            margin-right: auto;
+            width: 150px;
+            margin-top: auto;
+            margin-bottom: auto;
+            height: 50px;
+        }
+
+        form div button {
+            margin-left: auto;
+            margin-right: auto;
+            width: 150px;
+            margin-top: 10px;
+            margin-bottom: auto;
+            height: 50px;
+        }
+        #message{
+            color: red;
+            margin-left:auto;
+            margin_right:auto ;
+            width: 200px;
+        }
+    </style>
+    <div id="message">
+
+    </div>
+
+    <div class="container mx-auto my-auto" id="main">
+        <div class="form-group">
+            <form action="/u/verify/{{which}}" method="POST">
+                <label class="form-group" for="">enter your password</label>
+                <input class="form-control" type="password" name="password">
+
+                <div class="">
+                    <button type="submit" class="btn btn-primary form group ">submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</section>
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (event) {
+            event.preventDefault()
+            var form_data = $(this).serialize()
+
+            var what =
+        
+            $.ajax({
+            url: '/u/verify/'+{{which}},
+            method: "POST",
+            data:form_data,
+
+
+            dataType: 'json',
+
+
+            success: final
+        })
+        })
+       
+    })
+    $('form').submit(function (event) {
+        $("#message").remove('.has-error')
+        $('.display-block').remove()
+    })
+    function final(response) {
+
+        if (response.status) {
+
+            $("#message").fadeIn(500)
+            $('#message').addClass('has-error')
+            $('#message').append('<div class="display-block">' + response.progress + '</div>')
+            $("#message").fadeOut(500)
+            var delay = 3000
+            setTimeout(function () {
+                $("#message").remove('has-error')
+                $('.display-block').remove()
+                location.href = response.url
+            }, delay)
+        } else {
+            $('#message').addClass('has-error')
+            $('#message').append('<div class="display-block">' + response.progress + '</div>')
+        }
+    }
+</script>

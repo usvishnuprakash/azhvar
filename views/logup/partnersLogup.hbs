@@ -1,0 +1,98 @@
+<style>
+	
+</style>
+<div>
+
+
+	<form action="/p/logup" method="POST">
+		<div class="signup-form">
+
+
+
+			<h2>SignUp to Become Patner </h2>
+			<h3 style="color: rgba(44, 42, 44, 0.658);">Make Your Customer Happy!!!</h3>
+			<p>Please fill in this form to create an account!</p>
+			<hr>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-6"><input type="text" class="form-control" name="first_name"
+							placeholder="First Name" required="required"></div>
+					<div class="col-xs-6"><input type="text" class="form-control" name="last_name"
+							placeholder="Last Name" required="required"></div>
+				</div>
+			</div>
+			<div class="form-group col-xs-6">
+				<input type="text" class="form-control" name="regNum" id="regNum" placeholder="Enter Number" required="required" onkeyup="validation()">
+			<label for="" id="validTest" style="color: red ;"></label>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control control" id="password" name="password"
+					placeholder="Password" required="required">
+				<span id="visible" class="fa fa-eye"
+					style="margin-left: -51px;cursor: pointer;float: right;margin-top: -31px;"></span>
+
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="confirm_password" 
+					placeholder="Confirm Password" required="required" onkeyup="validatePassword()">
+				<span id="visible1" class="fa fa-eye"
+					style="margin-left: -51px;cursor: pointer;float: right;margin-top: -31px;"></span>
+			</div>
+			<div class="form-group">
+				<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a
+						href="#">Terms of
+						Use</a> &amp; <a href="#">Privacy Policy</a></label>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+			</div>
+
+			<div class="hint-text">Already have an account? <a href="#">Login here</a></div>
+		</div>
+	</form>
+</div>
+<script>
+	password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+	function validatePassword() {
+		var password1 = document.getElementById("password")
+		var password2 = document.getElementById("confirm_password")
+		if (password1.value === password2.value) {
+			password2.setCustomValidity('')
+		} else {
+			password2.setCustomValidity("password doesn't match")
+		}
+	}
+	var togglePassword = document.querySelector('#visible');
+	var password = document.querySelector('#password1');
+	togglePassword.addEventListener('click', function (e) {
+		// toggle the type attribute
+		const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+		password.setAttribute('type', type);
+		// toggle the eye slash icon
+		this.classList.toggle('fa-eye-slash');
+	});
+	const togglePassword1 = document.querySelector('#visible1');
+	const password1 = document.querySelector('#password2');
+	togglePassword1.addEventListener('click', function (e) {
+		// toggle the type attribute
+		const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+		password1.setAttribute('type', type);
+		// toggle the eye slash icon
+		this.classList.toggle('fa-eye-slash');
+	});
+function validation(){
+		var phType=/^[7-9]\d{9}$/;
+		var phone=document.getElementById("regNum").value
+		if(phType.test(phone)){
+			document.getElementById("validTest").innerHTML="vaild"
+			document.getElementById("validTest").style.visibility="hidden"
+			document.getElementById("vaildTest").style.color="green"
+		}else{
+			document.getElementById("validTest").innerHTML="Invalid"
+			document.getElementById("validTest").style.visibility="visible"
+			document.getElementById("vaildTest").style.color="red"
+		}
+
+	}
+</script>

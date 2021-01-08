@@ -1,0 +1,177 @@
+<style>
+    .container {}
+
+    .razorpay {
+        margin-left: 50%;
+        margin-top: 5px;
+        background-color: #60b246;
+    }
+
+    img {
+        height: 30px;
+        width: 100px;
+    }
+
+    .mx-auto {
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #outerDiv {
+        width: 220px;
+        height: 500px;
+        background-color: #edf1f7;
+    }
+</style>
+
+
+<div class="mx-auto" id="outerDiv">
+    <div class="mx-auto">
+        <div>
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Razorpay_logo.svg/1896px-Razorpay_logo.svg.png"
+                alt="">
+        </div>
+        <div>
+            <button class="btn btn-primary" id="razorpay" onclick="rzp_payment('{{orderId}}')"> razoropay </button>
+        </div>
+    </div>
+    <div class="mx-auto" id="paytmDiv">
+        <div>
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Razorpay_logo.svg/1896px-Razorpay_logo.svg.png"
+                alt="">
+        </div>
+        <div>
+            <button class="btn btn-primary" id="paytm" onclick="paytm_payment('{{orderId}}')"> paytm </button>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<div class="mx-auto my-auto">
+    <div class="mt-2">
+        <label for="">razoropay</label>
+
+
+    </div>
+</div>
+<script>
+    function rzp_payment(orderId) {
+        $.ajax({
+            url: "/u/payment/" + orderId,
+            method: 'get',
+            dataType: "json",
+            data: orderId,
+            success: (response) => {
+
+                transaction(response)
+            }
+
+
+        })
+    }
+    function transaction(order) {
+
+
+        var options = {
+            "key": "rzp_test_mpNY30MHx7HsC8", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Azhwar",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+
+                paymentverify(response, order)
+            },
+
+
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+        rzp1.on('payment.failed', function (response) {
+
+        });
+
+    }
+
+
+    function paymentverify(response, order) {
+        $.ajax({
+            url: "/u/payConfirm/rzp",
+            method: "post",
+            data: {
+                response,
+                order
+            },
+            success: (response) => {
+                if (response.status) {
+                    location.href = '/u/allSuccess'
+                } else {
+                    alert(response)
+                }
+            }
+        })
+
+
+    }
+</script>
+<script type="application/html" crossorigin="anonymous" src="{HOST}/merchantpgpui/checkoutjs/merchants/{MID}.js"
+    onload="onScriptLoad();"> </script>
+
+
+<script>
+    function paytm_payment(orderId) {
+
+        $.ajax({
+            url: "/payment/" + orderId,
+            method: 'get',
+            dataType: "json",
+            data: orderId,
+            success: (response) => {
+
+                paytmCheckout(response)
+            }
+
+
+        })
+
+        function paytmCheckout(order){
+        
+                var config = {
+                    "root": "",
+                    "flow": "DEFAULT",
+                    "data": {
+                        "orderId": order.ORDER_ID, /* update order id */
+                        "token": "", /* update token value */
+                        "tokenType": "TXN_TOKEN",
+                        "amount": "TXN_AMOUNT" /* update amount */
+                    },
+                    "handler": {
+                        "notifyMerchant": function (eventName, data) {
+                            console.log("notifyMerchant handler function called");
+                            console.log("eventName => ", eventName);
+                            console.log("data => ", data);
+                        }
+                    }
+                };
+
+                if (window.Paytm && window.Paytm.CheckoutJS) {
+                    window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
+                        // initialze configuration using init method 
+                        window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+                            // after successfully updating configuration, invoke JS Checkout
+                            window.Paytm.CheckoutJS.invoke();
+                        }).catch(function onError(error) {
+                            console.log("error => ", error);
+                        });
+                    });
+                }
+            
+        }
+    }
+</script>

@@ -1,0 +1,67 @@
+<style>
+    #maindiv {
+        width: 350px;
+        height: 200px;
+        color: rgb(70, 70, 187);
+    }
+
+    .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+    }
+
+    .my-auto {
+        margin-top: auto;
+        margin-bottom: auto;
+        height: auto;
+    }
+
+    p {
+        color: blue;
+    }
+
+    a {
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80px;
+    }
+
+    #errMessage {
+        color: red;
+    }
+
+    #message {
+        color: blue;
+    }
+    #button{
+         margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80px;
+    }
+</style>
+<section>
+    <div id="mainDiv mx-auto my-auto">
+        {{#if errMessage}}
+        <div class="text-center">
+
+            <p id="errMessage">{{errMessage}}</p>
+        </div>
+        <div id="button">
+            <a href="/forgot/users" class="btn btn-success ">Ok</a>
+        </div>
+
+        {{else}}
+        <div class="text-center">
+
+            <p id="message">password is updated</p>
+        </div>
+        <div id="button">
+            <a href="/u/login" class="btn btn-success ">Ok</a>
+        </div>
+
+        {{/if}}
+    </div>
+</section>

@@ -1,0 +1,48 @@
+<style>
+  #footer {
+    clear: both;
+  }
+</style>
+
+<div class="ml-5 mt-3 col-sm-12 col-xl-3 col-lg-3 col-md-6 container"
+  style="width: 375px; height: 500px ;background-color: aliceblue;">
+  <div class="mx-auto" style="height:80px ;width:340px ;">
+    {{#each client}}
+    <div>
+      <div class="w-25 p-2 h-50 d-inline-block" style=""><span class="ml-2">{{this.user.first_name}}
+          {{this.user.second_name}}</span>
+      </div>
+      <div class="float-right w-75 p-2 text-centre" style="">
+        al,;nfvhbsfiluvbiubfvilubviluvb</div>
+      <div class="w-25 p-2 h-50 d-inline-block " style=""><span class="ml-2">name</span>
+      </div>
+      <div class="float-right w-75 p-2 " style="">name </div>
+
+    </div>
+    <div style="height: 420px;">
+      <div style="width: 125px; height: 120px; ">
+        <img src="" alt="">
+      </div>
+      <div class="w-50 p-3 float-left">
+        
+        <p>product</p>
+        <p>IMEI NO</p>
+        <p>color</p>
+        <p>purchased date</p>
+        <p>endDate</p>
+      </div>
+      <div class="w-50 p-3 float-right">
+        <p>{{this.modal}}</p>
+        <p>{{this.IMEI_number}}</p>
+        <p>{{this.color}}</p>
+        <p>purchased date</p>
+        <p>endDate</p>
+      </div>
+    </div>
+    {{/each}}
+
+  </div>
+
+
+
+</div>

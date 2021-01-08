@@ -1,0 +1,87 @@
+{{#if client}}
+<div class="container">
+    <div>
+        <label for="">name</label>
+        <span>{{client.first_name}} {{client.last_name}}</span>
+    </div>
+    <div>
+        <label for="">Register Number</label>
+        <span>{{client.regNum}}</span>
+    </div>
+
+
+</div>
+{{/if}}
+<form action="/u/buy" method="POST">
+    <div class="container" style="background-color: rgb(227, 233, 190);">
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">BRAND</label>
+            <select name="brand" class="form-control" id="exampleFormControlSelect1" required="required">
+                <option>CHOOSE YOUR BRAND</option>
+                <option>samsung</option>
+                <option>oppo</option>
+                <option>vivo</option>
+                <option>Oneplud</option>
+                <option>xiaomi</option>
+                <option>realme</option>
+                <option>nokia</option>
+                <option>micromax</option>
+                <option>xiomi</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Modal Name</label>
+            <input name="modal" type="text" class="form-control" id="pwd" placeholder="your gadget exact modal name"
+                required="required">
+        </div>
+        <div class="form-group">
+            <label for="pwd">varient</label>
+            <input name="varient" type="text" class="form-control" id="pwd" placeholder="your internal and ram"
+                required="requi">
+
+        </div>
+        <div class="form-group">
+            <label for="pwd">color</label>
+            <input name="color" type="text" class="form-control" id="" required="required">
+        </div>
+        <div class="form-group">
+            <label for="pwd"> Please Enter a IMEI NO:</label>
+            <input type="number" class="form-control" id="IMEI_NO" name="IMEI_NO" required="required" 
+                 title="please check your imei whether correct or not ">
+
+        </div>
+        <div class="form-group">
+            <label for="pwd">Confirm IMEI NO:</label>
+            <input name="confirm_IMEI_NO" type="number" class="form-control" id="confirm_IMEI" required="required"
+                title="please check your imei whether correct or not " >
+
+        </div>
+
+        <button class="btn btn-success mx-auto mt-3 form-group form-control ">add product</button>
+
+    </div>
+</form>
+
+<script>
+
+    confirm_IMEI.onkeyup = function confirm_IMEI() {
+        var IMEI1 = document.getElementById("IMEI_NO")
+        var IMEI2 = document.getElementById("confirm_IMEI")
+        if (IMEI1.value === IMEI2.value) {
+            IMEI2.setCustomValidity('')
+        } else {
+            IMEI2.setCustomValidity("CHECK AND TWO IMEI SHOULD BE SAME")
+        }
+    }
+    IMEI_NO.onchange=function IMEI_NO(){
+        var IMEI=document.getElementById("IMEI_NO")
+        if(IMEI.value.length<15){
+            IMEI.setCustomValidity("your IMEI_NO isn't vaild must have minimum 15 charactor")
+        }else if(IMEI.value.length>17){
+            IMEI.setCustomValidity("your IMEI_NO isn't vaild IMEI only have maximum 17 charactor")
+        }else{
+            IMEI.setCustomValidity('')
+        }
+    }
+</script>

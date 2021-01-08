@@ -1,0 +1,40 @@
+{
+  "name": "myproject",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
+    "async": "^3.2.0",
+    "bcrypt": "^5.0.0",
+    "bootstrap": "^4.5.3",
+    "cookie": "^0.4.1",
+    "cookie-parser": "~1.4.4",
+    "crypto": "^1.0.1",
+    "db": "^3.3.0",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "flash": "^1.1.0",
+    "hbs": "^4.1.1",
+    "http-errors": "~1.6.3",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.13",
+    "morgan": "~1.9.1",
+    "nodemailer": "^6.4.16",
+    "nodemon": "^2.0.6",
+    "objectid": "^3.2.1",
+    "paytm-nodejs": "^1.0.0",
+    "promise": "^8.1.0",
+    "razorpay": "^2.0.6",
+    "xoauth2": "^1.2.0"
+  },
+  "devDependencies": {
+    "handlebars": "^4.7.6"
+  }
+}

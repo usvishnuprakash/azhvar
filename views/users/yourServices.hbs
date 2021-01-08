@@ -1,0 +1,39 @@
+<section>
+    {{#each repairDetailes}}
+    <div id="#main_div" class="container">
+        <div id="product_div">
+            <div>
+                <p class="float-left text-center">brand</p>
+                <h3 class="flaot-right text-center">{{this.user.product.modal}}</h3>
+            </div>
+            <div>
+                <p class="float-left">modal</p>
+                <h3 class="flaot-right text-center">{{this.product.product.brand}}</h3>
+            </div>
+            <div>
+                <p class="float-left">varient</p>
+                <h3 class="flaot-right text-center"></h3>
+            </div>
+            <div>
+                <p class="float-left">IMEI no</p>
+                <h3 class="flaot-right text-center"></h3>
+            </div>
+        </div>
+        <div id="problem_div">
+            <div>
+                <label for="">problem</label>
+                <p>{{this.problem}}</p>
+            </div>
+            <div>
+                <label for="">report date</label>
+                <p></p>
+            </div>
+        </div>
+        <div id="status_div">
+            <div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</section>

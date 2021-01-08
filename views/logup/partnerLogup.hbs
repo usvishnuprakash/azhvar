@@ -1,0 +1,305 @@
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #f1f1f1;
+    }
+
+    #regForm {
+        background-color: #ffffff;
+        margin: 100px auto;
+        font-family: Raleway;
+        padding: 40px;
+        width: 70%;
+        min-width: 300px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    input {
+        padding: 10px;
+        width: 100%;
+        font-size: 17px;
+        font-family: Raleway;
+        border: 1px solid #aaaaaa;
+    }
+
+    /* Mark input boxes that gets an error on validation: */
+    input.invalid {
+        background-color: #ffdddd;
+    }
+
+    /* Hide all steps by default: */
+    .tab {
+        display: none;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 17px;
+        font-family: Raleway;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    #prevBtn {
+        background-color: #bbbbbb;
+    }
+
+    /* Make circles that indicate the steps of the form: */
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+    .step.active {
+        opacity: 1;
+    }
+
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+        background-color: #4CAF50;
+    }
+</style>
+
+<body>
+
+    <form id="regForm" action="/p/logup" method="POST">
+
+
+
+
+        <div class="signup-form tab container">
+
+
+
+            <h2>SignUp to Become Patner </h2>
+            <h3 style="color: rgba(44, 42, 44, 0.658);">Make Your Customer Happy!!!</h3>
+            <p>Please fill in this form to create an account!</p>
+            <hr>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6"><input oninput="this.className = ''" type="text" name="" class="form-control"
+                            name="first_name" placeholder="First Name" required="required"></div>
+                    <div class="col-xs-6"><input oninput="this.className = ''" type="text" class="form-control"
+                            name="last_name" placeholder="Last Name" required="required"></div>
+                </div>
+            </div>
+            <div class="form-group col-xs-6">
+                <input oninput="this.className = ''" type="text" class="form-control" name="regNum" id="regNum"
+                    placeholder="Enter Number" required="required" onkeyup="validation()">
+                <label for="" id="validTest" style="color: red ;"></label>
+            </div>
+            <div class="form-group">
+                <input oninput="this.className = ''" type="password" class="form-control control" id="password1"
+                    name="password" placeholder="Password" required="required">
+                <span id="visible" class="fa fa-eye"
+                    style="margin-left: -51px;cursor: pointer;float: right;margin-top: -31px;"></span>
+
+            </div>
+            <div class="form-group">
+                <input oninput="this.className = ''" type="password" class="form-control" id="password2"
+                    placeholder="Confirm Password" required="required" onkeyup="conformation()">
+                <span id="visible1" class="fa fa-eye"
+                    style="margin-left: -51px;cursor: pointer;float: right;margin-top: -31px;"></span>
+            </div>
+            <div class="form-group">
+                <label class="checkbox-inline"><input oninput="this.className = ''" type="checkbox" required="required">
+                    I accept the <a href="#">Terms of
+                        Use</a> &amp; <a href="#">Privacy Policy</a></label>
+            </div>
+
+            <div class="hint-text">Already have an account? <a href="#">Login here</a></div>
+        </div>
+
+        <div class="tab container">
+
+            <div class="form-group ">
+                <label for="inputsm">ShopName</label>
+                <input oninput="this.className = ''" style="border-color: black;border-width: 1px;" name="shopName"
+                    id="inputsm" type="text">
+            </div>
+            <div class="form-group">
+                <label for="comment">Addres</label>
+                <textarea oninput="this.className = ''" style="border-color: black;border-width: 1px;"
+                    class="form-control" name="address" rows="5" id="comment"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="inputlg">PinCode</label><br>
+                <input oninput="this.className = ''" style="border-color: black;border-width: 1px;" name="pincode"
+                    id="inputlg" type="text">
+            </div>
+            <div class="form-group">
+
+
+
+                <label for="cars">Choose :</label>
+
+                <select oninput="this.className = ''" name="shopCatogory"
+                    class="browser-default custom-select form-contol">
+                    <option selected>Shop Catogory</option>
+                    <option value="1">Mobile&aAccossories</option>
+                    <option value="2">Laptop&Accessories</option>
+                    <option value="3">Camera&Assoeries</option>
+                </select>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <button class="btn btn-primary">join</button>
+            </div>
+        </div>
+
+
+
+
+        <div style="overflow:auto;">
+            <div style="float:right;">
+                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+        </div>
+        <!-- Circles which indicates the steps of the form: -->
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+
+        </div>
+    </form>
+
+    <script>
+        function conformation() {
+            var password1 = document.getElementById("password1")
+            var password2 = document.getElementById("password2")
+            if (password1.value === password2.value) {
+                password2.setCustomValidity('')
+            } else {
+                password2.setCustomValidity("password doesn't match")
+            }
+        }
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        showTab(currentTab); // Display the current tab
+
+        function showTab(n) {
+            // This function will display the specified tab of the form...
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+            //... and fix the Previous/Next buttons:
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+            //... and run a function that will display the correct step indicator:
+            fixStepIndicator(n)
+        }
+
+        function nextPrev(n) {
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("tab");
+            // Exit the function if any field in the current tab is invalid:setCustomValidity
+            if (n == 1 && !validateForm()) return false;
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            // Increase or decrease the current tab by 1:
+            currentTab = currentTab + n;
+            // if you have reached the end of the form...
+            if (currentTab >= x.length) {
+                // ... the form gets submitted:
+                document.getElementById("regForm").submit();
+                return false;
+            }
+            // Otherwise, display the correct tab:
+            showTab(currentTab);
+        }
+
+        function validateForm() {
+            // This function deals with validation of the form fields
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("tab");
+            y = x[currentTab].getElementsByTagName("input");
+            // A loop that checks every input field in the current tab:
+            for (i = 0; i < y.length; i++) {
+                // If a field is empty...
+                if (y[i].value == "") {
+                    // add an "invalid" class to the field:
+                    y[i].className += " invalid";
+                    // and set the current valid status to false
+                    valid = false;
+                }
+            }
+            // If the valid status is true, mark the step as finished and valid:
+            if (valid) {
+                document.getElementsByClassName("step")[currentTab].className += " finish";
+            }
+            return valid; // return the valid status
+        }
+
+        function fixStepIndicator(n) {
+            // This function removes the "active" class of all steps...
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            //... and adds the "active" class on the current step:
+            x[n].className += " active";
+        }
+
+
+        const togglePassword = document.querySelector('#visible');
+        const password = document.querySelector('#password1');
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+        const togglePassword1 = document.querySelector('#visible1');
+        const password1 = document.querySelector('#password2');
+        togglePassword1.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+            password1.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+        function validation() {
+            var phType = /^[7-9]\d{9}$/;
+            var phone = document.getElementById("regNum").value
+            if (phType.test(phone)) {
+                document.getElementById("validTest").innerHTML = "vaild"
+                document.getElementById("validTest").style.visibility = "hidden"
+                document.getElementById("vaildTest").style.color = "green"
+            } else {
+                document.getElementById("validTest").innerHTML = "Invalid"
+                document.getElementById("validTest").style.visibility = "visible"
+                document.getElementById("vaildTest").style.color = "red"
+            }
+
+        }
+    </script>

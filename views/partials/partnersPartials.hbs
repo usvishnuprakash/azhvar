@@ -1,0 +1,137 @@
+<header>
+    <div class="container-fluid " style="background-color: black;">
+
+      <style>
+        body {
+          font-family: "Lato", sans-serif;
+        }
+
+        .sidenav {
+          height: 100%;
+          width: 0;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: #111;
+          overflow-x: hidden;
+          transition: 0.5s;
+          padding-top: 60px;
+        }
+
+        .sidenav a {
+          padding: 8px 8px 8px 32px;
+          text-decoration: none;
+          font-size: 25px;
+          color: #818181;
+          display: block;
+          transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+          color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+          position: absolute;
+          top: 0;
+          right: 25px;
+          font-size: 36px;
+          margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+          .sidenav {
+            padding-top: 15px;
+          }
+
+          .sidenav a {
+            font-size: 18px;
+          }
+        }
+      </style>
+
+
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+           {{#if partner}}
+      
+       
+        <a data-toggle="collapse" data-target="#demo" class="fa fa-user-circle" href=""><i class="far fa-user-circle"
+            style="color: white;">{{partner.first_name}}{{partner.last_name}}</i></a>
+
+        <div id="demo" class="collapse mx-auto">
+         <a href="">your Services</a>
+         <a href="">your detailes</a>
+         </div>
+    
+ {{else}}
+ <div>
+       
+        <a data-toggle="collapse" data-target="#demo" class="fa fa-user-circle" href=""><i class="far fa-user-circle"
+            style="color: white;">profile</i></a>
+
+        <div id="demo" class="collapse mx-auto">
+         <a href="">your Services</a>
+         <a href="">your detailes</a>
+         </div>
+    </div>
+    {{/if}}
+        <a href="/about">About</a>
+        <a href="/howItsWork">how Its Work</a>
+        <a href="/contact_us">About</a>
+        
+        {{#if partner}}
+        <hr>
+        <div>
+          <a href="/p/logout">logout</a>
+        </div>
+        <hr>
+        {{/if}}
+      </div>
+
+
+      <span style="font-size:30px;cursor:pointer ;color: white;" onclick="openNav()">&#9776; </span>
+
+      <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+      </script>
+
+
+      <div class="dropdown float-right mr-auto" style=";color: black;">
+        <button style="background-color: black; border-color: black;" class="btn btn-secondary dropdown-toggle" type="button"
+          id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          signin
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">retailer</a>
+           <a class="dropdown-item" href="#">customer</a>
+
+        </div>
+      </div>
+
+
+      <div class="dropdown float-right .ml-auto">
+        <button style="background-color: black; border-color: black;" class="btn btn-secondary dropdown-toggle" type="button"
+          id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          signup
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/p/logup">retailer</a>
+
+        </div>
+
+      </div>
+    <div class=".mr-4 float-right">
+      <a href="/" style="text-decoration: none;">
+        <h1 style="color: white;font-style: italic;">Azhvar</h1>
+      </a>
+    </div>
+    </div>
+  </header>

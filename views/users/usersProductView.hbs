@@ -1,0 +1,93 @@
+<style>
+  .alert {
+    padding: $alert-padding-y $alert-padding-x;
+    margin-bottom: $alert-margin-bottom;
+    border: $alert-border-width solid transparent;
+    @include border-radius($alert-border-radius);
+  }
+
+  .mx-auto {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+</style>
+
+<section>
+  <div class="container" style="background-color:rgb(243, 231, 179) ;">
+    <div class="mx-auto" style="width: 80%;">
+      {{#each product}}
+      <div class="mt-1 mx-auto">
+        
+      </div>
+
+
+      <div class="mt-1 ">
+
+        <h4 style="width: 50%;" class="float-left mt-1 text-center">modal</h4>
+        <h4 style="width: 50%;" class=" float-right mt-1 text-center"><u>{{this.modal}}</u></h4>
+
+
+      </div>
+      <div class="mt-2 ">
+
+        <h4 style="width: 50%;" class=" float-left mt-2 text-center">Brand</h4>
+        <h4 style="width: 50%;" class=" float-right mt-2 text-center"><u>{{this.brand}}</u> </h4>
+
+
+      </div>
+      <div class=" ">
+
+        <h4 style="width: 50%;" class=" float-left mt-2 text-center">varient</h4>
+        <h4 style="width: 50%;" class=" float-right mt-2 text-center"><u>{{this.varient}}</u> </h4>
+
+
+      </div>
+
+
+
+
+
+      <div class=" ">
+
+        <h4 style="width: 50%;" class=" float-left mt-2 text-center">color</h4>
+        <h4 style="width: 50%;" class=" float-right mt-2 text-center">{{this.color}}</h4>
+
+
+      </div>
+      <div class=" ">
+        
+
+
+      </div>
+      <div class="mt-3 ">
+
+        <h4 style="width: 50%;" class=" float-left mt-2 text-center">IMEI NO</h4>
+        <h4 style="width: 50%;" class=" float-right mt-2 text-center"><u>{{this.IMEI_number}}</u> </h4>
+      </div>
+      <div class="mt-3 ">
+
+        <h4 style="width: 50%;" class=" float-left mt-2 text-center">service Buying Date</h4>
+        <h4 style="width: 50%;" class=" float-right mt-2 text-center"><u>{{this.time}}</u> </h4>
+      </div>
+     
+
+
+
+      <div class=" mt-3 mx-auto" style="width: 30%;">
+        <a class="btn btn-success mt-4" href="/u/needRepair/{{this._id}}">Need Repair</a>
+      </div>
+
+     {{/each}}
+
+    </div>
+ <div>
+        <h4>Address</h4>
+        <div class="alert alert- text-center" style="background-color:;">
+         <h6>{{user.userDetailes.address}}</h6>
+        </div>
+      </div>
+  </div>
+</section>
+<script>
+ 
+</script>

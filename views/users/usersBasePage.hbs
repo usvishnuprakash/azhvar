@@ -1,0 +1,231 @@
+<style>
+    #footer {
+        clear: both;
+    }
+
+    .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+    }
+
+    .img-fluid {
+        max-width: auto;
+        height: 100%;
+
+        div {
+            border-color: black;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 16px;
+    }
+
+    a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .previous {
+        background-color: #f1f1f1;
+        color: black;
+    }
+
+    .next {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .round {
+        border-radius: 50%;
+    }
+
+    #buyButton {
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+    }
+
+    #buyDiv {
+        height: 100px;
+        width: 200px;
+        color: rgb(82, 82, 3);
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+    }
+
+    #main {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        border-radius: 10px;
+        height: 100px;
+        margin-top: 50px;
+        border: 1px solid black;
+        background-color: rgba(213, 242, 243, 0.678);
+    }
+
+    .btn-primary {
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+    }
+
+    .fa-mobile {
+        height: 15px;
+        width: 15px;
+    }
+
+    #round {
+        margin-: auto;
+
+    }
+
+    .my-auto {
+        margin-top: auto;
+        margin-bottom: auto ;
+
+
+    }
+</style>
+<style>
+    #comDiv {
+        margin-top: 5%;
+        flex-wrap: wrap;
+    }
+
+    #comments {
+
+        justify-content: space-evenly;
+    }
+
+    .pb-cmnt-container {
+        font-family: Lato;
+        margin-top: 100px;
+    }
+
+    .pb-cmnt-textarea {
+        resize: none;
+        padding: 20px;
+        height: 130px;
+        width: 100%;
+        border: 1px solid #F2F2F2;
+    }
+</style>
+<section>
+
+
+    <div id="buyDiv">
+
+        <a id="" class="btn btn-primary  list-unstyled quick-links mx-auto" href="/u/buy">
+            <i class="fa fa-mobile"></i>
+            add your gadget</a>
+    </div>
+    {{#if service}}
+    {{#each service}}
+    <div id="main" calss="container">
+
+        <div class=" float-left " style="width: 20%;height: 100%;">
+
+            <div>
+                <h6 class="my-4">
+                <p class="text-center my-auto">{{this.brand}}</p>
+            </h6>
+             
+            </div>
+        </div>
+        <div class=" float-left" style="width: 20%;height: 100%;">
+            <h6 class="my-4">
+                <p class="text-center my-auto">{{this.modal}}</p>
+            </h6>
+        </div>
+
+        <div class="container float-left " style="width: 40%;height: 100%;">
+            <p class="text-center my-4">{{this.IMEI_number}}</p>
+        </div>
+
+        <div class="container float-left " style="width: 20%;height: 100%;">
+            <div class="align-middle my-auto">
+                <a id="round" href="/u/view/{{this._id}}" class="next round text-center "
+                    style="margin-top: 20%;">&#8250;</a>
+            </div>
+
+        </div>
+
+    </div>
+    {{/each}}
+    {{else}}
+
+    <img class="_2tuBw _12_oN _38fqp " height="262" alt="" style="margin-left:39% ;"
+        src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_262/empty-orders-image_acrbbw">
+    {{/if}}
+</section>
+<section>
+    <div>
+        <h5> commands <section></section></h5>
+        <div><a href="/all_commands">see all commands</a></div>
+    </div>
+    <div id="message" class="mx-auto">
+        <p></p>
+    </div>
+    <div id="comDiv">
+        {{#if user_comment}}
+        {{#each user_comment}}
+        <div id="comments" class="mx-auto">
+            <div>
+                <i class="fa fa-user float-left "></i>
+                <h5 class="">{{this.name}}</h5>
+            </div>
+            <div>
+                <p>{{this.comment}}</p>
+            </div>
+        </div>
+        <hr>
+        {{/each}}
+        {{/if}}
+
+
+
+
+        <div class="container mx-auto">
+            <form action="/u/comment" method="POST">
+                <textarea placeholder="write your command here" name="comment" id="" cols="30" rows="10"
+                    class="pb-cmnt-textarea"></textarea>
+                <button class="btn btn-primary mx-auto">share</button>
+            </form>
+        </div>
+
+
+</section>
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (event) {
+            event.preventDefault
+            var Form_Data = $(this).serialize()
+            $.ajax({
+                url: '/u/comment',
+                method: 'post',
+                data: Form_Data,
+                dataType: 'json',
+                success: function (response) {
+                    console.log('fine')
+                    location.href = '/u'
+                }
+            })
+        })
+    })
+    $('form').submit(function () {
+        $('#message').removeClass('has-error')
+        $('.help-block').remove();
+    })
+</script>

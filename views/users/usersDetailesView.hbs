@@ -1,0 +1,154 @@
+<style>
+    .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+    }
+
+    #border {
+        border-radius: 15px;
+        width: auto;
+        height: auto;
+        border: 2px solid #353632;
+    }
+
+    #border a {
+        margin-left: 90%;
+        text-decoration: none;
+
+    }
+
+    #border .my-auto {
+        margin-top: auto;
+        margin-bottom: auto;
+        height: auto;
+    }
+
+    #button {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        width: 100px;
+    }
+
+    #message {
+        margin-left: auto;
+        margin-right: auto;
+        width: 300px;
+        color: blue;
+    }
+</style>
+
+<section>
+    <div id="border" class="container mx-auto">
+        <div>
+
+            <label for="">userName</label>
+            <h4>{{user.first_name}}{{user.last_name}}</h4>
+            <a href="/u/verify/{{change.one}}">&#10148;</a>
+            <hr>
+        </div>
+        <div>
+            <label for="">password</label>
+            <h4>&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</h4>
+            <a href="/u/verify/{{change.two}}">&#10148;</a>
+            <hr>
+        </div>
+        <div>
+            <label for="">email</label>
+            <h4>{{user.email}}</h4>
+            <a href="/u/verify/{{change.three}}">&#10148;</a>
+            <hr>
+        </div>
+    </div>
+    <div id="border" class="container">
+        <div id="message">
+
+        </div>
+        <form action="/u/dataUpdate" method="POST">
+            <div class="form-group">
+                <label class="form-group" for="">secondary number</label>
+                <input value="{{user.userDetailes.secondary_number}}" type="mobile" name="secondary_number"
+                    class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="form-group">address</label>
+                <textarea class="form-control" name="address" id="address" cols="30"
+                    rows="10">{{user.userDetailes.address}}</textarea>
+            </div>
+            <div>
+                <button id="button" class="btn btn-primary mx-auto my-auto">done</button>
+            </div>
+        </form>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (event) {
+            event.preventDefault()
+            var form_data = $(this).serialize()
+            $.ajax({
+                url: '/u/dataUpdate',
+                data: form_data,
+                method: 'post',
+                dataType: 'json',
+                success: (response) => {
+                    if (response.status) {
+                        console.log('status')
+                        $("#message").fadeIn(3000);
+                        $('#message').addClass('has-error')
+                        $('#message').append('<div class="help-block" >' + response.message + '</div>')
+
+                        var delay = 3000
+                        setTimeout(function () {
+
+                            console.log('fine')
+
+                            removeclass()
+
+                        }, delay)
+                    } else if (response.err) {
+
+                        $('#message').addClass('has-error')
+                        $('#message').append(' < div  >' + response.message + '</div > ')
+                        var delay = 3000
+                        setTimeout(function () {
+                            $("#message").delay(1000).fadeOut(500);
+                            $('#border').removeClass('has-error');
+                            $('.help-block').remove();
+                        }, delay)
+                    } else {
+
+                        location.href = '/u/dataView'
+                    }
+                }
+            })
+
+        })
+
+    })
+    function removeclass() {
+        $("#message").fadeOut(3000);
+
+        $('#message').removeClass('has-error');
+        $('.help-block').remove();
+
+    }
+
+</script>
+<script>
+    function change_name(which) {
+        event.preventDefault()
+        $.ajax({
+            url: '/u/verify',
+            method: 'POST',
+            data: which,
+            dataType: 'json',
+            success: function (response) {
+                if (response.status) {
+                    alert('hai')
+                }
+            }
+        })
+    }
+</script>

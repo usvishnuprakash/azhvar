@@ -1,0 +1,67 @@
+<style>
+    .container {
+        background-color: rgb(235, 238, 214);
+
+    }
+</style>
+
+<form action="/u/addService" method="POST">
+    <div class="container" >
+
+        <div class=" form-group">
+        <label for="exampleFormControlSelect1">BRAND</label>
+        <input name="brand" type="text" value="{{product.brand}}" required="required">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">modal</label>
+        <input name="modal" type="tusersHelpers.addService(req.body,req.session.user._id)ext" value="{{product.modal}}"
+            required="required">
+    </div>
+    <div class="form-group">
+        <label for="pwd">varient</label>
+        <input value="{{product.varient}}" name="varient" type="text" class="form-control" id=""
+            placeholder="your internal and ram" required="required">
+    </div>
+    <div class="form-group">
+        <label for="pwd">color</label>
+        <input name="color" type="text" class="form-control" id="pwd" value="{{product.color}}" required="required">
+    </div>
+
+    <div class="form-group">
+        <label for="pwd">IMEI NO:</label>
+        <input type="text" class="form-control" id="IMEI_NO" value="{{product.IMEI_NO}}" name="IMEI_NO" required="required">
+
+    </div>
+    <div class="form-group">
+        <label for="pwd">IMEI NO:</label>
+        <input name="IMEI_number" type="text" class="form-control" id="confirm_IMEI" value="{{product.IMEI_NO}}"
+            required="required">
+
+    </div>
+
+    <button class="btn btn-success mx-auto mt-3 form-group form-control ">add product</button>
+
+    </div>
+</form>
+<script>
+
+    confirm_IMEI.onkeyup = function confirm_IMEI() {
+        var IMEI1 = document.getElementById("IMEI_NO")
+        var IMEI2 = document.getElementById("confirm_IMEI")
+        if (IMEI1.value === IMEI2.value) {
+            IMEI2.setCustomValidity('')
+        } else {
+            IMEI2.setCustomValidity("CHECK AND TWO IMEI SHOULD BE SAME")
+        }
+    }
+    IMEI_NO.onchange=function IMEI_NO(){
+        var IMEI=document.getElementById("IMEI_NO")
+        if(IMEI.value.length<15){
+            IMEI.setCustomValidity("your IMEI_NO isn't vaild must have minimum 15 charactor")
+        }else if(IMEI.value.length>17){
+            IMEI.setCustomValidity("your IMEI_NO isn't vaild IMEI only have maximum 17 charactor")
+        }else{
+            IMEI.setCustomValidity('')
+        }
+    }
+</script>

@@ -1,0 +1,226 @@
+<style>
+	#message {
+		display: none;
+		background: #f1f1f1;
+		color: #000;
+		position: relative;
+		padding: 20px;
+		margin-top: 10px;
+	}
+
+	#message p {
+		padding: 10px 35px;
+		font-size: 18px;
+	}
+
+
+	.valid {
+		color: green;
+	}
+
+	.valid:before {
+		position: relative;
+		left: -35px;
+		content: "✔";
+	}
+
+
+	.invalid {
+		color: red;
+	}
+
+	.invalid:before {
+		position: relative;
+		left: -35px;
+		content: "✖";
+	}
+
+	.help-block {
+		color: red;
+	}
+
+	.fa fa-eye {
+		margin-left: 71px;
+		cursor: pointer;
+
+		margin-top: -31px
+	}
+</style>
+<section>
+
+
+	<div class="container">
+
+
+		<form action="/u/logup" method="POST">
+			<div class="signup-form container">
+
+				<h2>User Sign Up</h2>
+				<p>Please fill in this form to create an account!</p>
+				<hr>
+
+
+				<div class="row form-group container">
+					<div class="col-xs-6"><input type="text" class="form-control" name="first_name"
+							placeholder="First Name" required="required"></div>
+					<div class="col-xs-6"><input type="text" class="form-control" name="last_name"
+							placeholder="Last Name" required="required"></div>
+				</div>
+
+				<div id="phone_group" class="form-group col-xs-6">
+					<input type="text" class="form-control" name="regNum" placeholder="phone" required="required">
+				</div>
+				<div id="email_group" class="form-group col-xs-6">
+					<input id="email" type="email" class="form-control" name="email" placeholder="email"
+						required="required">
+				</div>
+				<div class="form-group">
+					<input type="password" id="password" class="form-control" name="password" placeholder="Password"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-z]).{8,}"
+						title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+						required="required">
+					<span id="visible1" class="fa fa-eye"
+						style="margin-left: -51px;cursor: pointer;float: right;margin-top: -31px;"></span>
+					<div id="message">
+						<p id="number" class="invalid">A<b>number Must</b></p>
+						<p id="capital" class="invalid">A<b>upper case letter </b></p>
+						<p id="small" class="invalid">A<b>lowercase letter</b></p>
+						<p id="length" class="invalid">A<b>minimum 8 characters</b></p>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password"
+						required="required">
+					<i id="visible2" class="fa fa-eye"
+						style="margin-left: -51px;cursor: pointer;float: right;margin-top: -31px;"> </i>
+				</div>
+				<div class="form-group">
+					<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a
+							href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+				</div>
+				<div class="form-group">
+					<a href=""> <button type="submit" class="btn btn-primary btn-lg">Sign Up</button></a>
+				</div>
+
+
+			</div>
+		</form>
+		<div class="hint-text">Already have an account? <a href="/u/login">Login here</a></div>
+	</div>
+
+</section>
+
+
+<script>
+
+	confirm_password.onkeyup = function confirmPassword() {
+		var password1 = document.getElementById("password")
+		var password2 = document.getElementById("confirm_password")
+		if (password1.value === password2.value) {
+			password2.setCustomValidity('')
+		} else {
+			password2.setCustomValidity("password doesn't match")
+		}
+	}
+
+
+	var myinput = document.getElementById("password")
+	var small = document.getElementById("small")
+	var capital = document.getElementById("capital")
+	var number = document.getElementById("number")
+	var length = document.getElementById("length")
+
+	myinput.onfocus = function () {
+		document.getElementById("message").style.display = "block"
+	}
+	myinput.onblur = function () {
+		document.getElementById("message").style.display = "none"
+	}
+	myinput.onkeyup = function () {
+		var lowerCase = /[a-z]/g;
+		if (myinput.value.match(lowerCase)) {
+			small.classList.remove("invalid")
+			small.classList.add('valid')
+		} else {
+			small.classList.remove("valid")
+			small.classList.add("invalid")
+		}
+		var upperCase = /[A-Z]/g;
+		if (myinput.value.match(upperCase)) {
+			capital.classList.remove("invalid")
+			capital.classList.add('valid')
+		} else {
+			capital.classList.remove("valid")
+			capital.classList.add("invalid")
+		}
+		var digit = /[0-9]/g;
+		if (myinput.value.match(digit)) {
+			number.classList.remove("invalid")
+			number.classList.add('valid')
+		} else {
+			number.classList.remove("valid")
+			number.classList.add("invalid")
+		}
+
+		if (myinput.value.length >= 8) {
+			length.classList.remove("invalid")
+			length.classList.add('valid')
+		} else {
+			length.classList.remove("valid")
+			length.classList.add("invalid")
+		}
+
+	}
+
+	$(document).ready(function () {
+		$('form').submit(function (event) {
+			event.preventDefault()
+			var form_data = $(this).serialize()
+			$.ajax({
+				method: 'post',
+				url: '/u/logup',
+				data: form_data,
+				datatype: 'json', encode: true,
+				success: (response) => {
+					if (response.existEmail) {
+						$('#email_group').addClass('has-error')
+						$('#email_group').append('<div class="help-block" >' + response.existEmail + '</div>')
+					} else if (response.existNum) {
+						$('#phone_group').addClass('has-error')
+						$('#phone_group').append('<div class="help-block" >' + response.existNum + '</div>')
+					} else {
+						location.href = '/u/login'
+					}
+				}
+
+			})
+		})
+
+
+	})
+
+	$('form').submit(function (event) {
+
+		$('.form-group').removeClass('has-error');
+		$('.help-block').remove();
+	})
+
+	var togglePassword1 = document.querySelector('#visible1');
+	var password1 = document.querySelector('#password');
+	togglePassword1.addEventListener('click', function (e) {
+
+		var type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+		password1.setAttribute('type', type);
+		// toggle the eye slash icon
+		this.classList.toggle('fa-eye-slash');
+	});
+	var togglePassword2 = document.querySelector('#visible2');
+	var password2 = document.querySelector('#confirm_password');
+	togglePassword2.addEventListener('click', function (e) {
+
+		var type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+		password2.setAttribute('type', type);
+
+		this.classList.toggle('fa-eye-slash');
+	});
+</script>

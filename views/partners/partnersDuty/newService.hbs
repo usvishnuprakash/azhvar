@@ -1,0 +1,55 @@
+<form action="/p/newService/{{id}}" method="POST">
+    <div class="container" style="background-color: rgb(227, 233, 190);">
+
+
+
+        <div class="form-group">
+            <label class="form-group" for="exampleFormControlSelect1">category</label>
+            <input name="category" type="text" value="{{product.category}}" required="required">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">BRAND</label>
+            <input name="brand" type="text" value="{{product.brand}}" required="required">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">modal</label>
+            <input name="modal" type="text" value="{{product.modal}}" required="required">
+        </div>  
+        <div class="form-group">
+            <label for="pwd">varient</label>
+            <input value="{{product.varient}}" name="varient" type="text" class="form-control" id=""
+                placeholder="your internal and ram" required="required">
+        </div>
+        <div class="form-group">
+            <label for="pwd">color</label>
+            <input name="color" type="text" class="form-control" id="pwd" value="{{product.color}}" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="pwd">IMEI NO:</label>
+            <input  type="text" class="form-control" id="pwd" value="{{product.IMEI_number}}" required="required">
+
+        </div>
+        <div class="form-group">
+            <label for="pwd">IMEI NO:</label>
+            <input name="IMEI_number" type="text" class="form-control" id="pwd" value="{{product.IMEI_number}}" required="required">
+
+        </div>
+        <div>
+            <input type="file" accept="image/*" onchange="loadFile(event)">
+            <img style="background-color: rgb(227, 233, 190);width: 200px;" id="output" />
+        </div>
+        <button class="btn btn-success mx-auto mt-3 form-group form-control ">add product</button>
+
+    </div>
+</form>
+
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+</script>
