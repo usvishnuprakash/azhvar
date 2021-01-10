@@ -27,14 +27,14 @@ var usersRouter = require('./routes/users');
 var guestRouter = require('./routes/guest');
 var resetRouter = require('./routes/reset');
 var paymentRouter=require('./routes/payment')
-var app = express();
+var index = express();
 
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs',);
-app.engine('hbs', hbs({
+index.set('views', path.join(__dirname, 'views'));
+index.set('view engine', 'hbs',);
+index.engine('hbs', hbs({
   handlebars: allowInsecurePrototypeAccess(Handlebars),
   extname: "hbs",
   defaultLayout: "layouts",
@@ -43,19 +43,19 @@ app.engine('hbs', hbs({
   partialsDir: __dirname + "/views/partials/",
 })
 );
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: "key", resave: true, saveUninitialized: true, cookie: { maxAge: 60000000000000000 } }));
-app.use(flash());
+index.use(logger('dev'));
+index.use(express.json());
+index.use(express.urlencoded({ extended: false }));
+index.use(cookieParser());
+index.use(express.static(path.join(__dirname, 'public')));
+index.use(session({ secret: "key", resave: true, saveUninitialized: true, cookie: { maxAge: 60000000000000000 } }));
+index.use(flash());
 
-app.use('/', guestRouter);
-app.use('/p', partnersRouter);
-app.use('/u', usersRouter);
-app.use('/forgot',resetRouter);
-app.use('/payment',paymentRouter)
+index.use('/', guestRouter);
+index.use('/p', partnersRouter);
+index.use('/u', usersRouter);
+index.use('/forgot',resetRouter);
+index.use('/payment',paymentRouter)
 dataBase.connect((err,done) => {
   if (err) console.log('database is not connnected' + err)
   else console.log('database is connected')
@@ -63,19 +63,19 @@ dataBase.connect((err,done) => {
 
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+index.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+index.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.index.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
 
-module.exports = app;
+module.exports = index;
