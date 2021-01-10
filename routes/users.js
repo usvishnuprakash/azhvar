@@ -47,7 +47,7 @@ router.get('/logup', function (req, res) {
 })
 
 router.post('/logup', async function (req, res) {
-  await usersHelpers.findExistData(req.body).then(async (response) => {
+  await usersHelpers.fappistData(req.body).then(async (response) => {
     if (response.email) {
 
       res.json({ status: false, existEmail: response.email })

@@ -23,7 +23,7 @@ function paramsToString(params, mandatoryflag) {
         }  
     if (key !== 'CHECKSUMHASH' ) {
       if (params[key] === 'null') params[key] = '';
-      if (!mandatoryflag || mandatoryParams.indexOf(key) !== -1) {
+      if (!mandatoryflag || mandatoryParams.appOf(key) !== -1) {
         data += (params[key] + '|');
       }
     }
@@ -115,7 +115,7 @@ function paramsToStringrefund(params, mandatoryflag) {
         }  
     if (key !== 'CHECKSUMHASH' ) {
       if (params[key] === 'null') params[key] = '';
-      if (!mandatoryflag || mandatoryParams.indexOf(key) !== -1) {
+      if (!mandatoryflag || mandatoryParams.appOf(key) !== -1) {
         data += (params[key] + '|');
       }
     }

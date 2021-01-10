@@ -17,7 +17,7 @@ var instance = new Razorpay({
 
 
 module.exports = {
-    findExistData: (data) => {
+    fappistData: (data) => {
         return new promise(async (resolve, reject) => {
             var response = {}
             var existEmail = await db.get().collection(collections.USERS).findOne({ email: data.email })
