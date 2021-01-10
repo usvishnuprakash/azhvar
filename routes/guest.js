@@ -15,7 +15,7 @@ router.get('/',async function (req, res, next) {
       } else if (req.session.partner) {
          res.redirect('/p')
       } else {
-         res.render('guest/base', { guest: true })
+         res.render('guest/index', { guest: true })
       }
    } else {
      var comments=await guestHelpers.invoke_comments()
